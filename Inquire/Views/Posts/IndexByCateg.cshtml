@@ -1,0 +1,78 @@
+﻿
+
+<br/>
+
+<h2 class= "text-center"> Afisare articole categoria @ViewBag.CategoryName </h2>
+
+<br />
+
+<form method="GET">
+    <div class="input-group mb-3">
+        <input type="hidden" name="categoryId" value="@ViewBag.CategoryId"></input>
+        <input type="hidden" name="page" value="0"></input>
+        <input type="hidden" name="sort" value="@ViewBag.Sort" />
+        <input type="text" class="form-control" placeholder="Cautati subiecte sau cuvinte cheie" name="search"
+               value="@ViewBag.SearchString">
+        <button class="btn btn-outline-primary" type="submit">Search</button>
+    </div>
+</form>
+
+
+<form method="GET">
+    <div class="input-group mb-3">
+        <input type="hidden" name="categoryId" value="@ViewBag.CategoryId" />
+
+        <select name="sort">
+            <option disabled selected value="@ViewBag.Sort">@ViewBag.SortString</option>
+            <option value="Created">Data Postare</option>
+            <option value="Updated">Data Actualizare</option>
+            <option value="Likes">Aprecieri</option>
+            <option value="Comments">Comentarii</option>
+            <option value="Alfabetic">Alfabetic</option>
+        </select>
+        <button class="btn btn-outline-success" type="submit">Sorteaza</button>
+    </div>
+</form>
+
+@foreach(var post in ViewBag.Posts){
+
+    <div class="card">
+        <partial name ="PostInfo" model = "post" ></partial>
+
+        <a class="btn btn-primary" asp-controller="Posts" asp-action="Show" asp-route-Id="@post.Id">Afisare Post</a>
+        
+
+    </div>
+
+    <br/>
+    <br/>
+}
+
+
+@* Afisarea paginata a articolelor *@
+
+<div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="@ViewBag.PaginationBaseUrl=@ViewBag.CategoryId&page=1" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            @for (int i = 1; i <= ViewBag.lastPage; i++)
+            {
+                <li class="page-item"> <a class="page-link" href="@ViewBag.PaginationBaseUrl=@ViewBag.CategoryId&page=@(i)">@(i)</a> </li>
+            }
+
+            <li class="page-item">
+                <a class="page-link" href="@ViewBag.PaginationBaseUrl=@ViewBag.CategoryId&page=@(ViewBag.lastPage)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+

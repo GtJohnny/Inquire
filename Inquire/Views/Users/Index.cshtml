@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Lista utilizatori";
+}
+
+<h4 class="text-xl-center">@ViewBag.Title</h4>
+<br />
+
+@if (TempData.ContainsKey("message"))
+{
+    <h1>@ViewBag.message</h1>
+}
+
+<br />
+@foreach (ApplicationUser user in ViewBag.Users)
+{
+    <div class="d-flex justify-content-md-between alert-success py-2 px-5 rounded2">
+        <h3 class="text-md-center"><i class="bi bi-person"></i> @user.FirstName</h3>
+        <h3 class="text-md-center"><i class="bi bi-person"></i> @user.LastName</h3>
+        <h3 class="text-md-center"><i class="bi bi-globe"></i> @user.UserName</h3>
+    </div>
+    <br />
+    <div class="justify-content-between d-flex">
+        <a class="btn alert-primary" asp-controller="Users" asp-action="Show" asp-route-id="@user.Id">Afisare utilizator</a>
+        <a class="btn alert-secondary" asp-controller="Users" asp-action="Edit" asp-route-id="@user.Id">Editare utilizator</a>
+        <form method="post" asp-controller="Users" asp-action="Delete" asp-route-id="@user.Id">
+            <button class="btn alert-danger" type="submit">Sterge utilizator</button>
+        </form>
+        
+    </div>
+
+    <br />
+    <br />
+
+}
+
+

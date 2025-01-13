@@ -1,0 +1,73 @@
+﻿@model Inquire.Models.ApplicationUser
+
+<h2 class="text-center mt-5">Editare profil</h2>
+
+<br />
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-3">
+
+            <form method="post" asp-action="Edit" asp-controller="Users" asp-route-id="@Model.Id">
+
+
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="LastName" class="form-label">Nume</label>
+                    <br />
+                    <input asp-for="LastName" class="form-control" />
+
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+
+                    <br /><br />
+                </div>
+                <div class="form-group">
+                    <label asp-for="FirstName" class="form-label">Prenume</label>
+                    <br />
+                    <input asp-for="FirstName" class="form-control" />
+
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+
+                    <br /><br />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Bio" class="form-label">Continut Bio</label>
+                    <br />
+                    <textarea asp-for="Bio" class="form-control summernote"></textarea>
+
+                    <span asp-validation-for="Bio" class="text-danger"></span>
+
+                    <br /><br />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PhoneNumber" class="form-label">Telefon</label>
+                    <br />
+                    <input asp-for="PhoneNumber" class="form-control" />
+
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
+                    <br /><br />
+                </div>
+
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <div class="form-control">
+                     <label> Rol Utilizator:</label>
+                        <input type="hidden" name="OldRole" value="@ViewBag.EditUserRole" />
+                           <select name="NewRole">
+                               <option disabled selected="@ViewBag.EditUserRole">@ViewBag.EditUserRole</option>
+                               <option value="Admin">Admin</option>
+                               <option value="User">User</option>
+                           </select>
+                    </div>
+                }
+                <button type="submit" class="btn btn-primary">Salveaza</button>
+
+            </form>
+        </div>
+    </div>
+</div>

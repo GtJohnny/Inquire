@@ -1,0 +1,18 @@
+﻿
+
+@{
+    ViewData["Title"] = "Welcome to Inquire!";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+    <h5>Alege un subiect de conversație, și hai la debug</h5>
+
+    <div class = "container mt-4">
+        <div class=" d-flex flex-wrap gap-2 text-bg-info rounded">
+            @foreach(var category in ViewBag.Categories){
+                <a class="btn btn-primary" asp-controller="Posts" asp-action="IndexByCateg" asp-route-categoryId=@category.Id>@category.CategoryName</a>
+            }
+        </div>
+    </div>
+</div>
