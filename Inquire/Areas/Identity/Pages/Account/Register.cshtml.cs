@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Inquire.Data;
 
 namespace Inquire.Areas.Identity.Pages.Account
 {
@@ -114,11 +115,13 @@ namespace Inquire.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-
+                await _userManager.AddToRoleAsync(user, "User");
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
-
+                user.LastName = user.UserName.Substring(0,user.UserName.IndexOf('.'));
+                user.LastName = user.UserName.Substring(user.UserName.IndexOf('.'), user.UserName.IndexOf('@'));
+                
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
@@ -137,7 +140,9 @@ namespace Inquire.Areas.Identity.Pages.Account
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
+
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+
                     }
                     else
                     {

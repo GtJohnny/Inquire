@@ -4,67 +4,73 @@
 
 <br />
 
-<div class="container mt-5">
+<div class="container">
     <div class="row">
-        <div class="col-md-6 offset-3">
+        <div class="d-flex justify-content-between flex-column">
 
             <form method="post" asp-action="Edit" asp-controller="Users" asp-route-id="@Model.Id">
 
-
+                @* <div> *@
+                @*     <label asp-for="UserName" class="form-label  h4">Nume:</label> *@
+                @*     <div class=" card-title alert-info py-3 px-3 rounded-2"><i class="bi bi-person-fill"></i>@Model.LastName </div> *@
+                @* </div> *@
                 <div asp-validation-summary="All" class="text-danger"></div>
 
-                <div class="form-group">
-                    <label asp-for="LastName" class="form-label">Nume</label>
-                    <br />
-                    <input asp-for="LastName" class="form-control" />
-
+                <div class="form-group d-flex flex-column card-title alert-info py-3 px-3 rounded-2">
+                    <label asp-for="UserName" class="form-label">Nume Utilizator:</label>
+                    <input asp-for="UserName" class="form-control" />
                     <span asp-validation-for="LastName" class="text-danger"></span>
-
-                    <br /><br />
                 </div>
-                <div class="form-group">
-                    <label asp-for="FirstName" class="form-label">Prenume</label>
-                    <br />
+
+
+                <div class="form-group d-flex flex-column card-title alert-info py-3 px-3 rounded-2">
+                    <label asp-for="LastName" class="form-label">Nume:</label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class ="form-group d-flex flex-column card-title alert-info py-3 px-3 rounded-2">
+                    <label asp-for="FirstName" class="form-label">Prenume:</label>
                     <input asp-for="FirstName" class="form-control" />
 
                     <span asp-validation-for="FirstName" class="text-danger"></span>
 
-                    <br /><br />
                 </div>
 
-                <div class="form-group">
-                    <label asp-for="Bio" class="form-label">Continut Bio</label>
-                    <br />
+                <div class="form-group d-flex flex-column card-title alert-info py-3 px-3 rounded-2">
+                    <label asp-for="Bio" class="form-label">Continut Bio:</label>
                     <textarea asp-for="Bio" class="form-control summernote"></textarea>
-
                     <span asp-validation-for="Bio" class="text-danger"></span>
 
-                    <br /><br />
+                </div>
+                <div class="form-group d-flex flex-column card-title alert-info py-3 px-3 rounded-2">
+                    <label asp-for="Email" class="form-label">Email:</label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
 
-                <div class="form-group">
-                    <label asp-for="PhoneNumber" class="form-label">Telefon</label>
-                    <br />
-                    <input asp-for="PhoneNumber" class="form-control" />
+                <div class="text-center">
+                    <div class="form-group d-flex d-inline-flex text-center flex-column card-title alert-info py-3 px-3 rounded-2">
+                        <label asp-for="PhoneNumber" class="form-label">Telefon:</label>
+                        <input asp-for="PhoneNumber" class="form-control" />
 
-                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
 
-                    <br /><br />
-                </div>
-
-
-                @if (User.IsInRole("Admin"))
-                {
-                    <div class="form-control">
-                     <label> Rol Utilizator:</label>
-                        <input type="hidden" name="OldRole" value="@ViewBag.EditUserRole" />
-                           <select name="NewRole">
-                               <option disabled selected="@ViewBag.EditUserRole">@ViewBag.EditUserRole</option>
-                               <option value="Admin">Admin</option>
-                               <option value="User">User</option>
-                           </select>
                     </div>
-                }
+
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <div class="form-group d-flex d-inline-flex text-center flex-column card-title alert-info py-3 px-3 rounded-2">
+                         <label> Rol Utilizator:</label>
+                            <input type="hidden" name="OldRole" value="@ViewBag.EditUserRole" />
+                               <select name="NewRole">
+                                   <option disabled selected="@ViewBag.EditUserRole">@ViewBag.EditUserRole</option>
+                                   <option value="Admin">Admin</option>
+                                   <option value="User">User</option>
+                               </select>
+                        </div>
+                    }
+                </div>
                 <button type="submit" class="btn btn-primary">Salveaza</button>
 
             </form>

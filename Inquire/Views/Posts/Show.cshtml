@@ -17,7 +17,7 @@
 
     <partial name="PostInfo" model="Model"></partial>
 
-    @if ((ViewBag.AfisareButoane == true && Model.UserId == ViewBag.UserCurent)
+    @if ( Model.UserId == ViewBag.UserCurent
     || ViewBag.EsteAdmin == true)
     {
         <div class="d-flex flex-row justify-content-between">
@@ -37,8 +37,8 @@
 
 <br />
 <br />
-
-
+<h3 ></h3>
+<br />
 @foreach (var comm in Model.Comments)
 {
     <div class="container row-gap-3">

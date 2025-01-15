@@ -13,10 +13,10 @@ namespace Inquire.Models
         public virtual ICollection<Post>? Articles { get; set; }
 
 
-        [Required(ErrorMessage ="Prenumele este obligatoriu")]
-        public string FirstName { get; set; }
-        [Required(ErrorMessage = "Numele este obligatoriu")]
-        public string LastName { get; set; }
+     //   [Required(ErrorMessage ="Prenumele este obligatoriu")]
+        public string? FirstName { get; set; }
+      //  [Required(ErrorMessage = "Numele este obligatoriu")]
+        public string? LastName { get; set; }
 
         [MaxLength(400,ErrorMessage ="Bio-ul nu poate fi mai lung de 400 de caractere")]
         public string? Bio { get; set; }

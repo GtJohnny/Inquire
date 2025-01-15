@@ -82,7 +82,7 @@ namespace Inquire.Controllers
         {
             ApplicationUser user = db.Users.Find(id);
             setRights(id);
-            if (id == _userManager.GetUserId(User) || User.IsInRole("Admin"))
+            if (id == _userManager.GetUserId(User) || User.IsInRole("Admin") && ModelState.IsValid)
             {
                 if (User.IsInRole("User")) ViewBag.CurrentRole = "User";
                 if (User.IsInRole("Admin")) ViewBag.CurrentRole = "Admin";
@@ -126,6 +126,7 @@ namespace Inquire.Controllers
                 user.PhoneNumber = requestUser.PhoneNumber;
                 user.Email = requestUser.Email;
                 user.Bio = requestUser.Bio;
+                user.UserName = requestUser.UserName;
 
                 bool ok = false;
                 if (NewRole == null) ok = true;
@@ -148,7 +149,10 @@ namespace Inquire.Controllers
 
                 TempData["message"] = "Utilizatorul a fost editat";
                 TempData["messageType"] = "alert-success";
-                if (User.IsInRole("Admin")&&ok)
+
+                //return RedirectToAction("Show", "Users",id);
+
+                if (User.IsInRole("Admin") && ok)
                 {
                     return RedirectToAction("Index", "Users");
                 }
@@ -170,7 +174,6 @@ namespace Inquire.Controllers
         public IActionResult Show(string id)
         {
             var user = db.Users.Find(id);
-            
             return View(user);
         }
     }

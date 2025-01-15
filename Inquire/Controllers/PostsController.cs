@@ -199,7 +199,7 @@ namespace Inquire.Controllers
 
       
         // [HttpGet] 
-        [Authorize(Roles = "User,Admin")]
+        //[Authorize(Roles = "User,Admin")]
         public IActionResult Show(int id)
         {
             Post article = db.Posts.Include("Category")
