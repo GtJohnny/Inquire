@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.EntityFrameworkCore;
 using System.Data;
 
 namespace Inquire.Controllers
@@ -50,8 +51,12 @@ namespace Inquire.Controllers
         public IActionResult Delete(string id)
         {
             var user = db.Users.Find(id);
-            if(id == _userManager.GetUserId(User) || User.IsInRole("Admin"))
+            var posts = db.Posts.Where(p => p.UserId == id).Include("Comments");
+            var comms = db.Commentaries.Where(c => c.UserId == id);
+            if (id == _userManager.GetUserId(User) || User.IsInRole("Admin"))
             {
+                db.Posts.RemoveRange(posts);
+                db.Commentaries.RemoveRange(comms);
                 db.Users.Remove(user);
                 db.SaveChanges();
                 TempData["message"] = "Utilizatorul a fost sters";

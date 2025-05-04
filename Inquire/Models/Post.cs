@@ -12,6 +12,9 @@ namespace Inquire.Models
         [Required(ErrorMessage = "Titlul este obligatoriu")]
         [StringLength(100, ErrorMessage = "Titlul poate avea maxim 100 de caractere")]
         public string Title { get; set; }
+
+        [Required(ErrorMessage = "Descrierea este obligatorie")]
+        [StringLength(1000, ErrorMessage = "Descrierea poate avea maxim 1000 de caractere")]
         public string Description { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }

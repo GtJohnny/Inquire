@@ -48,7 +48,8 @@ namespace Inquire.Controllers
 
         public ActionResult New()
         {
-            return View();
+            Category cat = new Category();
+            return View(cat);
         }
 
         [HttpPost]
@@ -59,9 +60,8 @@ namespace Inquire.Controllers
                 db.Categories.Add(cat);
                 db.SaveChanges();
                 TempData["message"] = "Categoria a fost adaugata";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
-
             else
             {
                 return View(cat);
@@ -81,7 +81,6 @@ namespace Inquire.Controllers
 
             if (ModelState.IsValid)
             {
-
                 category.CategoryName = requestCategory.CategoryName;
                 db.SaveChanges();
                 TempData["message"] = "Categoria a fost modificata!";
