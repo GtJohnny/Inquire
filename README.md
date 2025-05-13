@@ -31,7 +31,10 @@ Tech matters — it’s not just about what you build, but how you build it.
 
 We believe this platform could become a cornerstone for student communities — technical or otherwise — in the digital age.
 
-##🤝 Contributing
+---
+
+
+## 🤝 Contributing
 
 We welcome contributions of all kinds:
 
@@ -41,7 +44,9 @@ UI/UX suggestions
 
 Code improvements
 
-Bug reports
+---
+
+
 
 ## 💡 Key Features
 
