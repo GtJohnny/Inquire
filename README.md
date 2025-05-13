@@ -97,7 +97,7 @@ dotnet run --project src/Inquire.Web
 ```
 
 ## ├ Project Structure
-
+```
 
 /Inquire
 ├── src/
@@ -108,3 +108,4 @@ dotnet run --project src/Inquire.Web
 ├── tests/                    # Unit and integration tests
 ├── .github/                  # Actions, workflows
 └── README.md
+```
